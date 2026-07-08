@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumo da Avaliação — Seminário Ampliado Linha IV · PPGEduC/UNEB</title>
+<link rel="icon" href="assets/logo_uneb.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1D2027;
+    --ink-soft:#535A68;
+    --paper:#EBEFF2;
+    --surface:#FFFFFF;
+    --line:#D6DCE1;
+    --line-soft:#E4E8EB;
+    --blue:#123A6E;
+    --blue-bright:#2E63AC;
+    --blue-pale:#E3EAF3;
+    --red:#9C3A2C;
+    --red-pale:#F3E4E0;
+    --gold:#9C7C3E;
+    --gold-pale:#EFE7D2;
+    --serif:'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --sans:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono:'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(18,58,110,0.015) 0px, rgba(18,58,110,0.015) 1px, transparent 1px, transparent 3px);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:980px; margin:0 auto; padding:0 28px;}
+
+  a{color:var(--blue-bright);}
+
+  /* ---------- Header ---------- */
+  .site-header{
+    background:var(--surface);
+    border-bottom:3px solid var(--gold);
+  }
+  .header-inner{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:18px 28px;
+  }
+  .brand-block{display:flex; align-items:center; gap:16px;}
+  .brand-block img{height:44px; width:auto; display:block;}
+  .brand-sep{width:1px; height:34px; background:var(--line);}
+  .brand-text{
+    font-family:var(--mono); font-size:11px; letter-spacing:.06em; color:var(--ink-soft);
+    text-transform:uppercase; line-height:1.4;
+  }
+  .brand-text strong{color:var(--blue); font-weight:600;}
+
+  /* ---------- Protocolo / Hero ---------- */
+  .protocolo{padding:52px 0 36px;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"§"; color:var(--red); font-family:var(--serif); font-size:16px;}
+
+  .protocolo-grid{display:flex; gap:36px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap;}
+  .protocolo-title{
+    font-family:var(--serif); font-weight:600; font-size:40px; line-height:1.14;
+    color:var(--ink); max-width:560px; margin:0 0 6px;
+  }
+  .protocolo-title em{font-style:italic; color:var(--blue);}
+  .protocolo-sub{
+    font-family:var(--serif); font-style:italic; color:var(--ink-soft); font-size:17px; max-width:560px; margin:0 0 22px;
+  }
+
+  .meta-table{
+    display:grid; grid-template-columns:auto 1fr; gap:6px 16px; font-family:var(--mono); font-size:12.5px;
+    max-width:520px;
+  }
+  .meta-table dt{color:var(--ink-soft); text-transform:uppercase; letter-spacing:.05em; white-space:nowrap;}
+  .meta-table dd{margin:0; color:var(--ink); font-weight:500;}
+
+  /* stamp */
+  .stamp{
+    flex:0 0 auto;
+    border:3px double var(--blue);
+    color:var(--blue);
+    padding:18px 26px;
+    transform:rotate(-3deg);
+    text-align:center;
+    mix-blend-mode:multiply;
+    min-width:190px;
+  }
+  .stamp-top{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;}
+  .stamp-num{font-family:var(--serif); font-weight:700; font-size:52px; line-height:1; margin:6px 0 2px;}
+  .stamp-den{font-family:var(--mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;}
+  .stamp-bottom{font-family:var(--mono); font-size:9px; letter-spacing:.1em; text-transform:uppercase; margin-top:8px; border-top:1px solid var(--blue); padding-top:6px; opacity:.85;}
+
+  /* ---------- Tabs ---------- */
+  .tabs{
+    display:flex; gap:2px; border-bottom:1px solid var(--line);
+  }
+  .tab-btn{
+    font-family:var(--mono); font-size:13px; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; border:none; cursor:pointer;
+    padding:14px 4px; margin-right:28px;
+    color:var(--ink-soft);
+    border-bottom:3px solid transparent;
+    transform:translateY(1px);
+  }
+  .tab-btn .n{color:var(--ink-soft); font-weight:400;}
+  .tab-btn.active{color:var(--blue); border-bottom-color:var(--gold); font-weight:600;}
+  .tab-btn:hover{color:var(--blue);}
+
+  .panel{display:none; padding:36px 0 20px;}
+  .panel.active{display:block;}
+
+  h2.section-title{
+    font-family:var(--serif); font-size:22px; font-weight:600; color:var(--ink);
+    margin:44px 0 6px; padding-top:20px; border-top:1px solid var(--line-soft);
+  }
+  .panel > h2.section-title:first-child{margin-top:0; padding-top:0; border-top:none;}
+  .section-note{color:var(--ink-soft); font-size:14px; margin:0 0 20px; max-width:640px;}
+
+  /* ---------- KPI cards ---------- */
+  .kpi-grid{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); margin-bottom:10px;
+  }
+  .kpi-card{background:var(--surface); padding:22px 20px;}
+  .kpi-num{font-family:var(--serif); font-weight:600; font-size:34px; color:var(--blue); line-height:1;}
+  .kpi-num .unit{font-size:16px; color:var(--ink-soft); font-weight:400;}
+  .kpi-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); margin-top:8px;}
+
+  /* ---------- Chips (resumo) ---------- */
+  .chip-cols{display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:8px;}
+  .chip-col-title{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--gold); margin-bottom:10px;}
+  .chip-row{
+    display:flex; justify-content:space-between; align-items:center; gap:10px;
+    padding:9px 0; border-bottom:1px solid var(--line-soft); font-size:14px;
+  }
+  .chip-row:last-child{border-bottom:none;}
+  .chip-name{color:var(--ink);}
+  .chip-bar-wrap{flex:1; height:6px; background:var(--blue-pale); margin:0 12px; position:relative; min-width:60px;}
+  .chip-bar-fill{position:absolute; left:0; top:0; height:100%; background:var(--blue-bright);}
+  .chip-val{font-family:var(--mono); font-size:13px; color:var(--ink-soft); white-space:nowrap; min-width:70px; text-align:right;}
+
+  /* ---------- Callout ---------- */
+  .callout{
+    border-left:4px solid var(--red);
+    background:var(--red-pale);
+    padding:18px 22px;
+    margin:24px 0;
+  }
+  .callout-label{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--red); margin-bottom:6px;}
+  .callout p{margin:0; font-size:15px; color:var(--ink);}
+  .callout strong{color:var(--red);}
+
+  .callout.gold{border-left-color:var(--gold); background:var(--gold-pale);}
+  .callout.gold .callout-label{color:var(--gold);}
+
+  /* ---------- Quote cards ---------- */
+  .quote-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:8px;}
+  .quote-card{
+    background:var(--surface); border:1px solid var(--line); padding:18px 20px; position:relative;
+  }
+  .quote-tag{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--blue); background:var(--blue-pale); display:inline-block; padding:2px 7px; margin-bottom:10px;
+  }
+  .quote-text{font-family:var(--serif); font-style:italic; font-size:15px; color:var(--ink); margin:0; line-height:1.5;}
+
+  /* ---------- Bar chart (ranked dimensions) ---------- */
+  .rank-chart{margin-top:6px;}
+  .rank-row{padding:10px 0; border-bottom:1px solid var(--line-soft);}
+  .rank-row:last-child{border-bottom:none;}
+  .rank-head{display:flex; justify-content:space-between; align-items:baseline; gap:10px; margin-bottom:6px;}
+  .rank-label{font-size:13.5px; color:var(--ink); max-width:720px;}
+  .rank-flag{font-family:var(--mono); font-size:9px; letter-spacing:.05em; text-transform:uppercase; color:var(--red); background:var(--red-pale); padding:1px 6px; margin-left:8px; white-space:nowrap;}
+  .rank-val{font-family:var(--mono); font-size:13px; color:var(--blue); font-weight:600; white-space:nowrap;}
+  .rank-track{height:8px; background:var(--blue-pale); position:relative; width:100%;}
+  .rank-fill{position:absolute; left:0; top:0; height:100%; background:var(--blue-bright);}
+  .rank-fill.attn{background:var(--red);}
+
+  /* ---------- Aggregate distribution stacked bar ---------- */
+  .stack-bar{display:flex; height:34px; width:100%; border:1px solid var(--line); overflow:hidden; margin:14px 0 10px;}
+  .stack-seg{display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:#fff; min-width:0;}
+  .stack-legend{display:flex; gap:18px; flex-wrap:wrap; font-family:var(--mono); font-size:11.5px; color:var(--ink-soft);}
+  .stack-legend span{display:inline-flex; align-items:center; gap:6px;}
+  .swatch{width:10px; height:10px; display:inline-block;}
+
+  /* ---------- Donuts ---------- */
+  .donut-grid{display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:10px;}
+  .donut-block{display:flex; align-items:center; gap:22px;}
+  .donut{width:130px; height:130px; border-radius:50%; flex:0 0 auto; position:relative;}
+  .donut-center{
+    position:absolute; inset:22px; border-radius:50%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; z-index:2; background:var(--paper);
+  }
+  .donut-center b{font-family:var(--serif); font-size:20px; color:var(--blue);}
+  .donut-center span{font-family:var(--mono); font-size:9px; color:var(--ink-soft); text-transform:uppercase;}
+  .donut-legend{font-size:13px;}
+  .donut-legend-row{display:flex; align-items:center; gap:8px; padding:4px 0;}
+  .donut-legend-row .swatch{border-radius:2px;}
+  .donut-legend-name{flex:1; color:var(--ink);}
+  .donut-legend-val{font-family:var(--mono); font-size:12px; color:var(--ink-soft);}
+
+  /* ---------- Horizontal bars (moments / timeline) ---------- */
+  .hbar-row{display:grid; grid-template-columns:170px 1fr 90px; align-items:center; gap:12px; padding:7px 0;}
+  .hbar-label{font-size:13px; color:var(--ink);}
+  .hbar-track{height:14px; background:var(--blue-pale); position:relative;}
+  .hbar-fill{position:absolute; left:0; top:0; height:100%; background:var(--blue-bright);}
+  .hbar-val{font-family:var(--mono); font-size:12px; color:var(--ink-soft); text-align:right;}
+
+  .col-chart{display:flex; align-items:flex-end; gap:14px; height:140px; margin-top:16px; padding:0 4px;}
+  .col{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%;}
+  .col-bar{width:100%; max-width:64px; background:var(--blue-bright);}
+  .col-val{font-family:var(--mono); font-size:11px; color:var(--blue); margin-bottom:4px;}
+  .col-label{font-family:var(--mono); font-size:10.5px; color:var(--ink-soft); margin-top:8px; text-transform:uppercase;}
+
+  /* ---------- Comments (extended) ---------- */
+  .comment-scroll{
+    max-height:520px; overflow-y:auto; border:1px solid var(--line); padding:4px 18px; background:var(--surface);
+  }
+  .comment-row{padding:14px 0; border-bottom:1px solid var(--line-soft);}
+  .comment-row:last-child{border-bottom:none;}
+  .comment-meta{font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--gold); margin-bottom:5px;}
+  .comment-text{font-size:14px; color:var(--ink); margin:0;}
+  .comment-cols{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:8px;}
+
+  /* ---------- Contraste proposta ---------- */
+  .contraste-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:12px;}
+  .contraste-col-title{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.06em;
+    margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .contraste-col-title.achieved{color:var(--blue);}
+  .contraste-col-title.absent{color:var(--red);}
+  .contraste-col-title .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
+  .contraste-col-title.achieved .dot{background:var(--blue);}
+  .contraste-col-title.absent .dot{background:var(--red);}
+
+  .contraste-card{
+    background:var(--surface); border:1px solid var(--line); padding:20px 22px; margin-bottom:16px;
+  }
+  .contraste-card.achieved{border-left:4px solid var(--blue);}
+  .contraste-card.absent{border-left:4px solid var(--red);}
+
+  .contraste-obj{
+    font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); margin-bottom:6px;
+  }
+  .contraste-heading{
+    font-family:var(--serif); font-size:16px; font-weight:600; color:var(--ink);
+    margin-bottom:8px; line-height:1.35;
+  }
+  .contraste-evidence{font-size:13.5px; color:var(--ink-soft); margin-bottom:10px; line-height:1.5;}
+  .contraste-evidence strong{color:var(--ink); font-weight:600;}
+  .contraste-rating{
+    font-family:var(--mono); font-size:12px; display:inline-flex; align-items:center; gap:6px;
+    padding:3px 8px; margin-bottom:10px;
+  }
+  .contraste-rating.good{background:var(--blue-pale); color:var(--blue);}
+  .contraste-rating.attn{background:var(--red-pale); color:var(--red);}
+
+  .contraste-quote{
+    font-family:var(--serif); font-style:italic; font-size:13.5px; color:var(--ink);
+    padding:10px 14px; border-left:2px solid var(--line); margin:8px 0;
+    background:var(--paper); line-height:1.5;
+  }
+  .contraste-quote-meta{
+    font-family:var(--mono); font-size:10px; color:var(--ink-soft); text-transform:uppercase;
+    letter-spacing:.04em; margin-top:4px; font-style:normal;
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer{
+    background:var(--blue); color:#EAF0F8; margin-top:64px; padding:36px 0 30px;
+  }
+  .footer-inner{display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; align-items:flex-start;}
+  .footer-title{font-family:var(--mono); font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:#9FB6D6; margin-bottom:8px;}
+  .footer-name{font-family:var(--serif); font-size:18px; font-weight:600;}
+  .footer-role{font-size:13px; color:#C4D3E7; margin-top:2px;}
+  .footer-contact{font-family:var(--mono); font-size:13px; color:#EAF0F8;}
+  .footer-contact a{color:#BFD6F2;}
+  .footer-note{font-size:12px; color:#8FA6C6; margin-top:22px; border-top:1px solid #2A4E7A; padding-top:16px;}
+
+  @media (max-width:760px){
+    .protocolo-title{font-size:30px;}
+    .kpi-grid{grid-template-columns:1fr 1fr;}
+    .chip-cols, .donut-grid, .quote-grid, .comment-cols, .contraste-grid{grid-template-columns:1fr;}
+    .hbar-row{grid-template-columns:110px 1fr 60px;}
+    .header-inner{padding:14px 18px;}
+    .wrap{padding:0 18px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand-block">
+      <img src="assets/logo_uneb.svg" alt="UNEB — Universidade do Estado da Bahia">
+      <div class="brand-sep"></div>
+      <img src="assets/ppgeduc_navlogo.svg" alt="PPGEduC — Programa de Pós-Graduação em Educação e Contemporaneidade">
+    </div>
+    <div class="brand-text">Linha de Pesquisa IV<br><strong>Educação, Currículo e Processos Tecnológicos</strong></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="protocolo">
+    <div class="eyebrow">PPGEduC / UNEB — Avaliação de Evento</div>
+    <div class="protocolo-grid">
+      <div>
+        <h1 class="protocolo-title">Resumo da Avaliação<br><em>Seminário Ampliado</em> da Linha IV</h1>
+        <p class="protocolo-sub">Educação, Currículo e Processos Tecnológicos: estudos e apropriações contemporâneas</p>
+        <dl class="meta-table" id="meta-table"><!-- filled by JS --></dl>
+      </div>
+      <div class="stamp">
+        <div class="stamp-top">Avaliação Geral</div>
+        <div class="stamp-num" id="stamp-num">–</div>
+        <div class="stamp-den">de 5,0</div>
+        <div class="stamp-bottom" id="stamp-n">n = –</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="resumo">Resumo <span class="n">· dados</span></button>
+    <button class="tab-btn" data-tab="detalhado">Detalhado <span class="n">· gráficos</span></button>
+  </nav>
+
+  <!-- ========================= RESUMO ========================= -->
+  <section class="panel active" id="panel-resumo">
+
+    <h2 class="section-title">Números gerais</h2>
+    <div class="kpi-grid" id="kpi-grid"><!-- JS --></div>
+
+    <div class="callout" id="callout-attention"><!-- JS --></div>
+
+    <h2 class="section-title">Proposta vs. avaliação</h2>
+    <p class="section-note">Cotejo entre os objetivos declarados na proposta do seminário e o que as avaliações efetivamente revelaram. A aba Detalhado traz as citações completas.</p>
+    <div class="contraste-grid">
+      <div>
+        <div class="contraste-col-title achieved"><span class="dot"></span>Bem representado na avaliação</div>
+
+        <div class="contraste-card achieved">
+          <div class="contraste-obj">Obj. Específico 3 · "Socializar as pesquisas em andamento na Linha"</div>
+          <div class="contraste-heading">Socialização das pesquisas e dos grupos</div>
+          <span class="contraste-rating good">4,64/5 · painéis socializaram pesquisas</span>
+          <div class="contraste-evidence">17 de 28 respondentes citaram espontaneamente o contato com pesquisas de outros grupos como a experiência mais positiva — o objetivo mais fortemente alcançado do seminário.</div>
+          <div class="contraste-quote">"Possiblidade de conhecer os grupos de pesquisas e o compartilhamento de suas pesquisas em andamento. Momento rico e profícuo."<div class="contraste-quote-meta">Aluno · LEME</div></div>
+        </div>
+
+        <div class="contraste-card achieved">
+          <div class="contraste-obj">Objetivo Geral · "Ampliar os estudos, discussões e apropriações teórico-epistemológicas"</div>
+          <div class="contraste-heading">Aprofundamento teórico-epistemológico e história da Linha</div>
+          <span class="contraste-rating good">4,75/5 · compreensão da proposta da Linha</span>
+          <div class="contraste-evidence">A conferência de abertura (4,68/5) e o Painel 1 cumpriram o papel de ancoragem conceitual. 5 respondentes destacaram o resgate da história e das escolhas filosóficas da Linha IV como ponto alto.</div>
+          <div class="contraste-quote">"Ampliar a compreensão em torno da história da linha e a razão das escolhas epistemológicas e filosóficas que a sustentam, favorecendo maior conhecimento dos propósitos de investigação da Linha."<div class="contraste-quote-meta">Aluno · FORTEC</div></div>
+        </div>
+
+      </div>
+      <div>
+        <div class="contraste-col-title absent"><span class="dot"></span>Ausências e lacunas frente à proposta</div>
+
+        <div class="contraste-card absent">
+          <div class="contraste-obj">Proposta · "11h – Perguntas e discussões" + Obj. Esp. 6 · "Estimular a colaboração e redes diversas"</div>
+          <div class="contraste-heading">Espaço para interação, perguntas e trocas</div>
+          <span class="contraste-rating attn">4,21/5 · menor nota entre as 14 dimensões</span>
+          <div class="contraste-evidence">O momento de debate livre foi comprimido pelo acúmulo de atrasos nas apresentações. 57% mencionaram gestão do tempo como questão crítica; 3 respondentes pediram explicitamente controle mais rigoroso dos mediadores.</div>
+          <div class="contraste-quote">"Alguns convidados não respeitaram o tempo limite de fala, inviabilizando o debate após as exposições iniciais. Sugiro reforçar que os convidados cumpram o tempo estabelecido, que deveria ser de até 15 minutos."<div class="contraste-quote-meta">Aluno · FORTEC</div></div>
+        </div>
+
+        <div class="contraste-card absent">
+          <div class="contraste-obj">Proposta · "Formato: Presencial com gravação no Youtube do PPGEduC"</div>
+          <div class="contraste-heading">Transmissão e formato acessível</div>
+          <span class="contraste-rating attn">3 pedidos espontâneos de formato híbrido/online</span>
+          <div class="contraste-evidence">A proposta declarou gravação no YouTube, mas pelo menos 3 respondentes solicitaram independentemente opção de participação remota — sugerindo que a transmissão prevista não foi efetivamente disponibilizada ou comunicada ao público.</div>
+          <div class="contraste-quote">"Sentir falta de ter uma transmissão para quem não pode participar presencialmente poder acompanhar."<div class="contraste-quote-meta">Aluno · LEME</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="section-title">Quem respondeu</h2>
+    <p class="section-note">Distribuição por papel no Programa e por grupo de pesquisa vinculado à Linha IV.</p>
+    <div class="chip-cols">
+      <div>
+        <div class="chip-col-title">Papel no PPGEduC</div>
+        <div id="chips-role"></div>
+      </div>
+      <div>
+        <div class="chip-col-title">Grupo de pesquisa</div>
+        <div id="chips-group"></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">O que mais marcou</h2>
+    <p class="section-note">Seleção de respostas à pergunta “o que mais lhe marcou positivamente neste seminário?”. A lista completa está na aba Detalhado.</p>
+    <div class="quote-grid" id="quote-highlight"><!-- JS --></div>
+
+  </section>
+
+  <!-- ========================= DETALHADO ========================= -->
+  <section class="panel" id="panel-detalhado">
+
+    <h2 class="section-title">Panorama de notas (392 respostas · 14 dimensões)</h2>
+    <p class="section-note">Cada um dos 28 participantes avaliou 14 aspectos do seminário em escala de 1 a 5. O gráfico abaixo soma todas as notas dadas.</p>
+    <div class="stack-bar" id="agg-stack"></div>
+    <div class="stack-legend" id="agg-legend"></div>
+
+    <h2 class="section-title">Ranking por dimensão avaliada</h2>
+    <p class="section-note">Média de 1 a 5 por pergunta do formulário, da mais bem avaliada à que mais recebeu ressalvas. Barras em vermelho indicam os dois pontos de atenção da edição.</p>
+    <div class="rank-chart" id="rank-chart"></div>
+
+    <h2 class="section-title">Perfil dos respondentes</h2>
+    <div class="donut-grid" id="donut-grid"></div>
+
+    <h2 class="section-title">Participação por momento do seminário</h2>
+    <p class="section-note">Quantos dos 28 respondentes marcaram ter participado de cada momento (pergunta de múltipla escolha).</p>
+    <div id="moments-chart"></div>
+
+    <h2 class="section-title">Respostas ao formulário por dia</h2>
+    <div class="col-chart" id="timeline-chart"></div>
+
+    <h2 class="section-title">Proposta vs. avaliação — visão detalhada</h2>
+    <p class="section-note">Cotejo entre os objetivos declarados na proposta do seminário e o que as 28 avaliações efetivamente revelaram, com citações na íntegra. Referências extraídas da "Proposta de Seminário Ampliado da Linha de Pesquisa (LPq) 4".</p>
+
+    <div class="contraste-grid">
+      <div>
+        <div class="contraste-col-title achieved"><span class="dot"></span>Objetivos bem representados na avaliação</div>
+
+        <!-- ACHIEVED 1 -->
+        <div class="contraste-card achieved">
+          <div class="contraste-obj">Obj. Específico 3 · "Socializar as pesquisas em andamento na Linha"<br>Obj. Específico 2 · "Apresentar as perspectivas conceituais dos grupos de pesquisa"</div>
+          <div class="contraste-heading">Socialização das pesquisas e visibilidade dos grupos</div>
+          <span class="contraste-rating good">4,64/5 · painéis socializaram pesquisas</span>
+          <div class="contraste-evidence">Este foi o objetivo mais fortemente confirmado pelas avaliações. <strong>17 de 28 respondentes</strong> citaram espontaneamente o contato com pesquisas de outros grupos como a experiência mais positiva do seminário, sem que a pergunta sugerisse esse tema.</div>
+          <div class="contraste-quote">"Possiblidade de conhecer os grupos de pesquisas e o compartilhamento de suas pesquisas em andamento. Momento rico e profícuo."<div class="contraste-quote-meta">Aluno · LEME</div></div>
+          <div class="contraste-quote">"A possibilidade de conhecer as produções da nossa Linha de Pesquisa e o quanto são impactantes para a nossa sociedade, especialmente as reverberações que produzem no contexto da Educação Básica."<div class="contraste-quote-meta">Aluno · FORTEC</div></div>
+          <div class="contraste-quote">"Conhecer todas as propostas dos grupos de pesquisas e a importância de utilizar nossos professores e colegas como referenciais, pois pude perceber que são extremamente qualificados e competentes nas temáticas estudadas."<div class="contraste-quote-meta">Aluno · GEPLET</div></div>
+        </div>
+
+        <!-- ACHIEVED 2 -->
+        <div class="contraste-card achieved">
+          <div class="contraste-obj">Objetivo Geral · "Ampliar os estudos, discussões e apropriações teórico-epistemológicas"<br>Obj. Específico 1 · "Aprofundar as apropriações de Currículo e Processos Tecnológicos"</div>
+          <div class="contraste-heading">Aprofundamento teórico-epistemológico e história da Linha IV</div>
+          <span class="contraste-rating good">4,75/5 · compreensão da proposta da Linha</span>
+          <div class="contraste-evidence">A conferência de abertura de Arnaud Soares (4,68/5) e o Painel 1 — planejados na proposta como âncoras conceituais — cumpriram esse papel. <strong>5 respondentes</strong> destacaram o resgate da história e das escolhas epistemológicas e filosóficas da Linha como ponto alto, e 4,68/5 avaliaram positivamente a articulação entre Educação, Epistemologia, Subjetividade, Técnica, Tecnologias e Linguagem.</div>
+          <div class="contraste-quote">"Ampliar a compreensão em torno da história da linha e a razão das escolhas epistemológicas e filosóficas que a sustentam, favorecendo maior conhecimento dos propósitos de investigação da Linha e suas possíveis contribuições para a área da Educação."<div class="contraste-quote-meta">Aluno · FORTEC</div></div>
+          <div class="contraste-quote">"Conhecer mais sobre a história da linha e as contribuições dos professores e orientadores nesse processo."<div class="contraste-quote-meta">Aluno · GEPLET</div></div>
+        </div>
+
+        <!-- ACHIEVED 3 -->
+        <div class="contraste-card achieved">
+          <div class="contraste-obj">Obj. Específico 4 · "Compartilhar e difundir as experiências de pesquisas realizadas por egressos"<br>Obj. Específico 6 · "Estimular a colaboração e redes entre docentes, discentes, egressos e pesquisadores"</div>
+          <div class="contraste-heading">Experiências de egressos e construção de redes de pertencimento</div>
+          <span class="contraste-rating good">4,68/5 · reflexão crítica a partir de experiências</span>
+          <div class="contraste-evidence">Os painéis de egressos, previstos na proposta, geraram reflexão crítica (4,68/5) e <strong>7 respondentes</strong> mencionaram a troca, integração e conexão como destaque positivo. O seminário reativou vínculos que o formato semestral de disciplinas não sustenta.</div>
+          <div class="contraste-quote">"Estar em contato novamente com os meus colegas após já ter pego as disciplinas obrigatórias. Esses momentos de troca são preciosos, e a gente só percebe quando já não precisamos mais estar junto toda semana."<div class="contraste-quote-meta">Aluno · GEPLET</div></div>
+          <div class="contraste-quote">"O alinhamento entre os grupos de pesquisa no sentido de contribuir para as discussões contemporâneas na formação de professores e nas oportunidades para os estudantes da Educação Básica."<div class="contraste-quote-meta">Egresso · GEPLET</div></div>
+        </div>
+
+      </div>
+      <div>
+        <div class="contraste-col-title absent"><span class="dot"></span>Ausências e lacunas frente à proposta</div>
+
+        <!-- ABSENT 1 -->
+        <div class="contraste-card absent">
+          <div class="contraste-obj">Proposta · "11h – Perguntas e discussões" + Obj. Esp. 6 · "Estimular a colaboração e redes diversas"</div>
+          <div class="contraste-heading">Espaço para interação, perguntas e trocas de experiências</div>
+          <span class="contraste-rating attn">4,21/5 · menor nota entre as 14 dimensões</span>
+          <div class="contraste-evidence">Embora a proposta tenha alocado "11h – Perguntas e discussões" e um objetivo específico inteiro à colaboração, esta foi a <strong>dimensão com pior avaliação</strong> do seminário. 5 respondentes deram notas 2 ou 3 e <strong>57% mencionaram gestão do tempo</strong> espontaneamente. O momento de debate livre foi comprimido pelo acúmulo de atrasos nas exposições — um problema que os próprios mediadores e a coordenação reconheceram nas respostas.</div>
+          <div class="contraste-quote">"Alguns convidados não respeitaram o tempo limite de fala, inviabilizando o debate após as exposições iniciais. Sugiro reforçar em eventos futuros que os convidados cumpram o tempo estabelecido, que a propósito deveria ser de até 15 minutos."<div class="contraste-quote-meta">Aluno · FORTEC</div></div>
+          <div class="contraste-quote">"Acredito que precisamos gerir melhor o tempo nas mesas. De repente fazer umas placas de aviso (faltam 5 ou 10 min), além de previamente esclarecer aos mediadores."<div class="contraste-quote-meta">Coordenador · FORTEC</div></div>
+          <div class="contraste-quote">"Senti falta de mais tempo para debates e diálogos durante os painéis."<div class="contraste-quote-meta">Aluno · GEPLET</div></div>
+        </div>
+
+        <!-- ABSENT 2 -->
+        <div class="contraste-card absent">
+          <div class="contraste-obj">Proposta · "Formato: Presencial com gravação no Youtube do PPGEduC"</div>
+          <div class="contraste-heading">Transmissão e formato acessível (YouTube / híbrido)</div>
+          <span class="contraste-rating attn">3 pedidos espontâneos de formato híbrido/online</span>
+          <div class="contraste-evidence">A proposta declarou gravação e transmissão no YouTube do PPGEduC. Contudo, <strong>3 respondentes independentes</strong> solicitaram opção de participação remota — sugerindo que a gravação prevista não foi efetivamente disponibilizada ou comunicada. Para um evento de 16h em dias úteis consecutivos, a ausência de acesso remoto limitou a participação de discentes com demandas profissionais.</div>
+          <div class="contraste-quote">"Sentir falta de ter uma transmissão para quem não pode participar presencialmente poder acompanhar."<div class="contraste-quote-meta">Aluno · LEME</div></div>
+          <div class="contraste-quote">"Realizar o evento em formato híbrido, caso ocorra em dias consecutivos."<div class="contraste-quote-meta">Aluno · GEOTEC</div></div>
+        </div>
+
+        <!-- ABSENT 3 -->
+        <div class="contraste-card absent">
+          <div class="contraste-obj">Proposta · "18h30 – Encerramento: Síntese das discussões, agradecimentos e perspectivas futuras"</div>
+          <div class="contraste-heading">Encerramento com síntese clara das discussões</div>
+          <span class="contraste-rating attn">4,39/5 · 2ª menor nota · única dimensão com nota 1</span>
+          <div class="contraste-evidence">O encerramento com síntese estava previsto para 18h30, mas foi a <strong>segunda dimensão com pior avaliação</strong> e a única a receber nota 1. Os atrasos acumulados ao longo do dia provavelmente comprimiram o tempo disponível para a síntese final — um efeito-cascata direto do problema de gestão do tempo identificado acima. 2 respondentes deram notas ≤ 2; o horário tardio (encerramento real após as 19h, segundo relatos) pode ter causado saídas antes do fechamento.</div>
+          <div class="contraste-quote">"Horário. Finalizou muito tarde."<div class="contraste-quote-meta">Egresso · LEME</div></div>
+          <div class="contraste-quote">"Não pude ficar até o encerramento devido o horário. No primeiro dia, eu saí praticamente às 18h e só consegui chegar em casa quase às 20h por causa do trânsito."<div class="contraste-quote-meta">Egresso · LEME</div></div>
+        </div>
+
+      </div>
+    </div>
+
+    <h2 class="section-title">Comentários na íntegra</h2>
+    <p class="section-note">Textos reproduzidos como enviados, identificados apenas por papel e grupo de pesquisa (sem nomes), para preservar a privacidade dos respondentes.</p>
+    <div class="comment-cols">
+      <div>
+        <div class="chip-col-title">Pontos altos (<span id="count-positives"></span>)</div>
+        <div class="comment-scroll" id="list-positives"></div>
+      </div>
+      <div>
+        <div class="chip-col-title">Sugestões e observações (<span id="count-suggestions"></span>)</div>
+        <div class="comment-scroll" id="list-suggestions"></div>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <div class="footer-title">Registrado por</div>
+      <div class="footer-name">Carlos Vidal</div>
+      <div class="footer-role">Discente — Linha de Pesquisa IV, PPGEduC/UNEB</div>
+    </div>
+    <div>
+      <div class="footer-title">Contato</div>
+      <div class="footer-contact">
+        <!-- EDITAR: substitua pelo seu e-mail/telefone antes de publicar -->
+        [ e-mail de contato ]<br>
+        Comissão Organizadora — Seminário Ampliado, Linha IV
+      </div>
+    </div>
+    <div>
+      <div class="footer-title">Sobre estes dados</div>
+      <div class="footer-role" style="max-width:280px;">Resumo interno, elaborado a partir das respostas ao formulário de avaliação do seminário. Não reflete posição oficial do PPGEduC/UNEB.</div>
+    </div>
+  </div>
+  <div class="wrap footer-note">Seminário Ampliado da Linha de Pesquisa IV · UNEB, Campus I · 09–10 de setembro de 2025</div>
+</footer>
+
+<script id="seminar-data" type="application/json">
+{"meta": {"total_submissions": 29, "test_excluded": 1, "n_valid": 28, "collection_start": "10/09/2025", "collection_end": "15/09/2025", "time_mentions": 16, "time_mentions_pct": 57}, "dims": [{"question_full": "A organização geral do evento atendeu às suas expectativas?", "label": "Organização geral do evento", "mean": 4.89, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 3, "5": 25}}, {"question_full": "A infraestrutura (auditório, horários, materiais de apoio, lanches coletivos) foi adequada?", "label": "Infraestrutura (auditório, horários, materiais, lanches)", "mean": 4.79, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 6, "5": 22}}, {"question_full": "O evento possibilitou uma compreensão mais clara da proposta teórico-epistemológica da Linha de Pesquisa 4 (Educação, Currículo e Processos Tecnológicos)?", "label": "Compreensão da proposta teórico-epistemológica da Linha", "mean": 4.75, "n": 28, "dist": {"1": 0, "2": 0, "3": 1, "4": 5, "5": 22}}, {"question_full": "As discussões evidenciaram a articulação entre Educação, Epistemologia, Subjetividade, Técnica, Tecnologias e Linguagem, conforme os fundamentos da Linha?", "label": "Articulação Educação–Epistemologia–Subjetividade–Técnica–Tecnologia–Linguagem", "mean": 4.68, "n": 28, "dist": {"1": 0, "2": 0, "3": 2, "4": 5, "5": 21}}, {"question_full": "O seminário contribuiu para refletir sobre os efeitos sociais, culturais, políticos e educacionais do Currículo e dos Processos Tecnológicos?", "label": "Reflexão sobre efeitos sociais, culturais e políticos do currículo/tecnologia", "mean": 4.61, "n": 28, "dist": {"1": 0, "2": 1, "3": 0, "4": 8, "5": 19}}, {"question_full": "A conferência apresentou de forma clara e aprofundada as apropriações contemporâneas da Linha 4?", "label": "Clareza e profundidade da conferência de abertura", "mean": 4.68, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 9, "5": 19}}, {"question_full": "Houve contribuição relevante para sua formação acadêmica e pesquisa?", "label": "Contribuição para formação acadêmica e pesquisa", "mean": 4.71, "n": 28, "dist": {"1": 0, "2": 0, "3": 1, "4": 6, "5": 21}}, {"question_full": "Os painéis socializaram de modo consistente as pesquisas em andamento e realizadas na Linha 4?", "label": "Painéis socializaram pesquisas em andamento", "mean": 4.64, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 10, "5": 18}}, {"question_full": "As experiências de docentes, discentes e egressos possibilitaram reflexões críticas sobre Currículo e Processos Tecnológicos?", "label": "Experiências de docentes/discentes/egressos geraram reflexão crítica", "mean": 4.68, "n": 28, "dist": {"1": 0, "2": 1, "3": 0, "4": 6, "5": 21}}, {"question_full": "O evento estimulou a colaboração entre grupos de pesquisa e redes diversas (docentes, discentes, egressos e pesquisadores externos)?", "label": "Estímulo à colaboração entre grupos e redes", "mean": 4.57, "n": 28, "dist": {"1": 0, "2": 0, "3": 1, "4": 10, "5": 17}}, {"question_full": "Houve espaço suficiente para interação, perguntas e trocas de experiências?", "label": "Espaço para interação, perguntas e trocas", "mean": 4.21, "n": 28, "dist": {"1": 0, "2": 2, "3": 3, "4": 10, "5": 13}}, {"question_full": "O encerramento apresentou uma síntese clara das discussões e perspectivas futuras da Linha 4?", "label": "Síntese clara no encerramento", "mean": 4.39, "n": 28, "dist": {"1": 1, "2": 1, "3": 0, "4": 10, "5": 16}}, {"question_full": "Você saiu do evento com novas perspectivas de pesquisa e possibilidades acadêmico/profissionais?", "label": "Saída com novas perspectivas de pesquisa/atuação", "mean": 4.71, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 8, "5": 20}}, {"question_full": "De forma geral, como você avalia o evento?", "label": "Avaliação geral do evento", "mean": 4.75, "n": 28, "dist": {"1": 0, "2": 0, "3": 0, "4": 7, "5": 21}}], "roles": {"Aluno": 20, "Professor": 2, "Egresso": 2, "PÓS-DOC": 1, "Coordenador": 1, "Aluno Especial": 1, "Pesquisador Externo": 1}, "groups": {"GEPLET": 8, "FORTEC": 7, "UMANITÁ": 5, "LEME": 5, "GEOTEC": 3}, "moments": [{"label": "Café da manhã e lanches coletivos", "count": 23}, {"label": "Conferência de Abertura", "count": 21}, {"label": "Painel 1", "count": 22}, {"label": "Painel 2", "count": 20}, {"label": "Painel 3", "count": 18}, {"label": "Painel 4", "count": 21}, {"label": "Painel 5", "count": 20}, {"label": "Painel 6", "count": 17}], "timeline": [{"label": "10/09", "count": 15}, {"label": "12/09", "count": 11}, {"label": "14/09", "count": 1}, {"label": "15/09", "count": 1}], "positives": [{"role": "Aluno", "group": "UMANITÁ", "text": "Interação da linha"}, {"role": "Aluno", "group": "GEOTEC", "text": "A história da Linha"}, {"role": "Aluno", "group": "FORTEC", "text": "Integração e conhecimento"}, {"role": "Aluno", "group": "LEME", "text": "Possiblidade de conhecer os grupos de pesquisas e o compartilhamento de suas pesquisas em andamento. Momento rico e profícuo."}, {"role": "Aluno", "group": "GEPLET", "text": "Conhecer mais sobre  a história da linha e as contribuições dos professores e orientadores nesse processo"}, {"role": "Aluno", "group": "LEME", "text": "A diversidade de saberes para a construção do conhecimento, tendo como fio condutor a linha IV."}, {"role": "Aluno", "group": "UMANITÁ", "text": "Conhecer a história da linha, conhecer os demais grupos de pesquisa..."}, {"role": "Aluno", "group": "GEPLET", "text": "As apresentações dos colegas"}, {"role": "Professor", "group": "GEPLET", "text": "Todo o seminário"}, {"role": "Aluno", "group": "GEPLET", "text": "Conhecer todas as propostas dos grupos de pesquisas e a importância de utilizar nossos professores e colegas como referenciais, pois pude perceber que são extremamente qualificados e competentes nas temáticas estudadas."}, {"role": "PÓS-DOC", "group": "GEOTEC", "text": "Os potenciais e contribuições das pesquisas"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Conhecer professores, egressos e alunos do PPGEduc com suas temáticas e pesquisas"}, {"role": "Aluno", "group": "FORTEC", "text": "As trocas de experiências dos grupos, além da trajetória marcante da linha 4."}, {"role": "Aluno", "group": "FORTEC", "text": "A possibilidade de dialogar com diversos pesquisadores, conhecendo novas perspectivas teóricas e metodológicas."}, {"role": "Aluno", "group": "FORTEC", "text": "Ampliar a compreensão em torno da história da linha e a razão das escolhas epistemológicas e filosóficas que a sustentam, favorecendo maior conhecimento dos propósitos de investigação da Linha e suas possíveis contribuições para a área da Educação."}, {"role": "Aluno", "group": "GEOTEC", "text": "A possibilidade de conhecer as pesquisas de egressos, poder trocar e somar saberes e perspectivas"}, {"role": "Aluno", "group": "LEME", "text": "Rever os colegas e professores do programa e conhecer a história da linha IV através de quem a iniciou."}, {"role": "Aluno", "group": "FORTEC", "text": "A possibilidade de conhecer as produções da nossa Linha de Pesquisa e o quanto são impactantes para a nossa sociedade, especialmente as reverberações que produzem no contexto da Educação Básica."}, {"role": "Egresso", "group": "GEPLET", "text": "O alinhamento entre os grupos de pesquisa no sentido de contribuir para as discussões contemporâneas na formação de professores e nas oportunidades para os estudantes da Educação Básica."}, {"role": "Coordenador", "group": "FORTEC", "text": "A possibilidade de conectar com outras pesquisas que tenham base na mesma linha de pesquisa."}, {"role": "Aluno Especial", "group": "GEPLET", "text": "A oportunidade de conhecer um pouco do que é estudado e desenvolvido em outros grupos da linha 4"}, {"role": "Egresso", "group": "LEME", "text": "A apresentação dos professores das temáticas"}, {"role": "Aluno", "group": "LEME", "text": "Exposição de pesquisas similares a minha que colaboram acrescentando outros pontos de vista aos meus estudos"}, {"role": "Aluno", "group": "GEPLET", "text": "Estar em contato novamente com os meus colegas após já ter pego as disciplinas obrigatórias. Esses momentos de troca são preciosos, e a gente só percebe quando já não precisamos mais estar junto toda semana."}, {"role": "Aluno", "group": "UMANITÁ", "text": "A escuta da história de parte dos professores e conhecer de primeira pessoas os projetos."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "As qualidades das pesquisas apresentadas e o alinhamento da equipe da Linha IV."}], "suggestions": [{"role": "Aluno", "group": "UMANITÁ", "text": "Já sinalizado nas questões anteriores"}, {"role": "Aluno", "group": "GEOTEC", "text": "Algum convidado internacional que tenha a ver com alguma temática específica ou mais geral"}, {"role": "Aluno", "group": "FORTEC", "text": "Trocas contínuas de pesquisas"}, {"role": "Aluno", "group": "LEME", "text": "Incluir o seminário numa grade anual"}, {"role": "Aluno", "group": "LEME", "text": "Que alguns seminários fossem realizados em forma de oficinas, divididos em subgrupos para uma discussão mais aprofundada."}, {"role": "Aluno", "group": "UMANITÁ", "text": "Rever os professores da disciplina de Seminário teorico-metodológico, pois ela precisa fortalecer a nossa formação como pesquisadores, entrega das notas com retorno por escrito dos trabalhos entregues com orientações e sugestões de melhoria dentro do prazo, adoção dos estudos/pesquisas realizados pelos professores da linha como referência das disciplinas aprofundando as compreensões de educação, currículo, tecnologia e contemporaneidade de acordo com a ementa do programa e não com o perspectiva de cada professor."}, {"role": "Aluno", "group": "GEPLET", "text": "Conhecer/divulgar as produções dos professores para que os discentes possam utilizar essas referências"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Eventos com mais dias e tempo para esclarecimentos e compreensão conceitual"}, {"role": "Aluno", "group": "FORTEC", "text": "Que o Seminário seja realizado anualmente."}, {"role": "Aluno", "group": "GEOTEC", "text": "Realizar o evento em formato híbrido, caso ocorra em dias consecutivos"}, {"role": "Aluno", "group": "LEME", "text": "Trazer formações com temas inovadores em educação e tecnologia para termos uma experiência imersiva e assim ampliar nosso repertório para a pesquisa e atuação na educação básica, pois muitos de nós pesquisadores estamos na educação básica e lidamos diariamente com os desafios de estimular o interesse dos estudantes pelo conhecimento. No mais, o seminário foi maravilhoso, nos oportunizou arejar a mente, foi um frescor, um abraço em meio as demandas da pesquisa."}, {"role": "Aluno", "group": "FORTEC", "text": "Que possamos realizar momentos de trocas experienciais, como esse, de maneira mais sistemática."}, {"role": "Egresso", "group": "GEPLET", "text": "Sugiro a difusão e a democratização dos conhecimentos e estudos realizados."}, {"role": "Coordenador", "group": "FORTEC", "text": "Que as linhas se fortalecessem ao longo do tempo e o seminário fosse o arremate dos inúmeros encontros."}, {"role": "Aluno Especial", "group": "GEPLET", "text": "Maior tempo de interação entre os grupos."}, {"role": "Egresso", "group": "LEME", "text": "Rever horário."}, {"role": "Aluno", "group": "LEME", "text": "Possuir a opção de participar online também"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Fazer painéis de discentes separados por metodologias de pesquisa."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "Feedback de alguma instituição e/ou campo pesquisado."}], "extra": [{"role": "Aluno", "group": "UMANITÁ", "text": "Elaborar orientações para os expositores visando objetividade"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Reduzir tempo de exposição"}, {"role": "Aluno", "group": "GEOTEC", "text": "Melhor controle do tempo pelos mediadores"}, {"role": "Aluno", "group": "FORTEC", "text": "Objetividade"}, {"role": "Aluno", "group": "FORTEC", "text": "Só continuar o trabalho em equipe"}, {"role": "Aluno", "group": "LEME", "text": "Ajustar tempos de intervalos"}, {"role": "Aluno", "group": "LEME", "text": "Excelente. Incluir o evento numa programação anual da linha 04"}, {"role": "Aluno", "group": "LEME", "text": "Aumentar o tempo para as discussões"}, {"role": "Aluno", "group": "LEME", "text": "Reorganizar o tempo das apresentações"}, {"role": "Aluno", "group": "GEPLET", "text": "Parabenizo a organização do evento. Além das aprendizagens construídas, reencontrar e ouvir meus professores sobre suas caminhadas e construção do programa, especialmente da Linha 4, foi muito rico. Foram momentos de aprendizagens, (re)encontros , memórias e afetos"}, {"role": "Aluno", "group": "GEPLET", "text": "Senti falta de mais tempo para debates e diálogos durante os painéis"}, {"role": "Aluno", "group": "GEPLET", "text": "Agradeço mais uma vez"}, {"role": "Aluno", "group": "LEME", "text": "O Seminário foi excelente, mas um pouco cansativo. Talvez, repensar em organizar para acontecer em dois dias, mas em apenas um turno."}, {"role": "Aluno", "group": "LEME", "text": "Seria interessante que todos os orientadores, coordenadores dos grupos de pesquisa estivessem presentes."}, {"role": "Aluno", "group": "UMANITÁ", "text": "Desenvolver na prática (das disciplinas da linha) os discursos aqui apresentados."}, {"role": "Aluno", "group": "UMANITÁ", "text": "Rever o tempo das apresentações, pois ficou corrido."}, {"role": "Aluno", "group": "UMANITÁ", "text": "O seminário foi um momento rico de trocas, aprendizagens..."}, {"role": "Aluno", "group": "GEPLET", "text": "Gostei muito do evento, aprendi muito com as pesquisas dos colegas; apenas gostaria de sugerir que outros fóruns sejam ampliados, com mais dias para essa interação"}, {"role": "Professor", "group": "GEPLET", "text": "Vamos dar continuidade  com as próximas edições- registrar  cada evento com um e-book reunindo  as pesquisas  apresentadas"}, {"role": "Professor", "group": "GEPLET", "text": "Esse evento  nos revelou a beleza  das pessoas e de suas pesquisas"}, {"role": "Aluno", "group": "GEPLET", "text": "Quero deixar registrado meu agradecimento aos coordenadores da linha e todo grupo envolvido na organização do seminário. Participar desse evento foi importante para retomarmos e reforçarmos os vínculos afetivos e epistemológicos, tão necessários ao processo de fazer pesquisa."}, {"role": "Aluno", "group": "GEPLET", "text": "Foi ótimo ouvir os colegas e saber o que está sendo produzido na linha 4."}, {"role": "Aluno", "group": "GEPLET", "text": "Muito enriquecedor, o seminário nos possibilitou conhecer mais acercas das propostas dos grupos de pesquisa que fazem parte da linha. Só potência!"}, {"role": "Aluno", "group": "GEPLET", "text": "Tudo maravilhoso e bem organizado."}, {"role": "PÓS-DOC", "group": "GEOTEC", "text": "A IMPORTÂNCIA DA CONTINUIDADE DO EVENTO"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Divulgar e Ter mais seminários ampliados"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Divulgação de literatura indicada por tema  da linha que possa contribuir ainda mais para compreensão das linhas de pesquisa, assim como, oficinas de reflexão sobre assuntos comuns como letramento, currículo, cultura digital e outros"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Para aprofundar é preciso mais tempo de seminário"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Faltou tempo para reflexão e perguntas"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Organizar registro para expôr à comunidade com fotos, imagens e temas apresentados"}, {"role": "Aluno", "group": "FORTEC", "text": "O tempo. Algumas falas dos membros das mesas foram aligeiradas."}, {"role": "Aluno", "group": "FORTEC", "text": "O tempo, alguns pontos importantes foram suprimidos. Ficou evidente na angústia de alguns que gostariam de concluir…"}, {"role": "Aluno", "group": "FORTEC", "text": "Atendeu."}, {"role": "Aluno", "group": "FORTEC", "text": "O Seminário foi um momento importante de socialização e aprofundamento dos trabalhos desenvolvidos, favorecendo a troca de experiências e a ampliação do olhar crítico na pesquisa acadêmica. Como sugestão, ter atenção à gestão do tempo nas apresentações."}, {"role": "Aluno", "group": "FORTEC", "text": "Nada a sugerir"}, {"role": "Aluno", "group": "FORTEC", "text": "Alguns convidados não respeitaram o tempo limite de fala, inviabilizando o debate após as exposições iniciais. Sugiro reforçar em eventos futuros que os convidados cumpram o tempo estabelecido, que a propósito deveria ser de até 15 minutos."}, {"role": "Aluno", "group": "FORTEC", "text": "A mesma sugestão já feita anteriormente, visando assegurar tempo de interação e perguntas."}, {"role": "Aluno", "group": "LEME", "text": "Não conseguir participar no segundo dia por motivo de trabalho, então sentir falta de ter uma transmissão para quem não pode participar presencialmente poder acompanhar como possível."}, {"role": "Aluno", "group": "LEME", "text": "Sugiro que tenhamos um painel mais formativo, com tema da linha, com convidados experientes na área, trazendo novos olhares para nós."}, {"role": "Aluno", "group": "LEME", "text": "Sugiroque tenhamos um painel mais formativo, com tema da linha, com convidados experientes na área, trazendo novos olhares para nós."}, {"role": "Aluno", "group": "FORTEC", "text": "Que seja feito em mais dias para oportunizar outras pessoas"}, {"role": "Aluno", "group": "FORTEC", "text": "Acredito que o controle do tempo para a explanação de cada participante deva ser rigorosa, visto que algumas pessoas ficaram prejudicadas por conta de colegas que se extenderam muito para além do limite estabelecido."}, {"role": "Egresso", "group": "GEPLET", "text": "A proposta da troca entre os grupos reforça o comprometimento da Linha com a construção do conhecimento científico e o compromisso com a sociedade."}, {"role": "Egresso", "group": "GEPLET", "text": "Sugiro uma ação de que mobilize a produção de artigos mesclando membros dos grupos."}, {"role": "Egresso", "group": "GEPLET", "text": "Compartilhar desse momento me fez refletir sobre a importância da minha pesquisa e fortaleceu  minha implicação com as discussões contemporâneas sobre educação, currículo e processos Tecnológicos."}, {"role": "Coordenador", "group": "FORTEC", "text": "Acredito que precisamos gerir melhor o tempo nas mesas. \nDe repente fazer umas placas de aviso ( faltam 5 ou 10 min), além de previamente esclarecer aos mediadores.\nNa composição do material final talvez seja interessante listar os títulos de todos os pesquisadores das linhas, principalmente os que estão cursando, além dos que já concluíram e apresentaram. \nAlém disso, parabenizar Carlos e Celeste pelo empenho e organização."}, {"role": "Egresso", "group": "LEME", "text": "Horário. Finalizou muito tarde."}, {"role": "Egresso", "group": "LEME", "text": "Não pude ficar até o en erramento devido o horário. No primeiro dia, eu saí praticamente às 18h e só consegui chegar em casa quase às 20h por causa do trânsito. Se puder que no próximo finalize mais cedo é melhor. Menos corrido."}, {"role": "Aluno", "group": "LEME", "text": "Excelente"}, {"role": "Aluno", "group": "GEPLET", "text": "Conhecer as pesquisas pelos próprios pesquisadores foi bastante esclarecedor e inspirador! Talvez se o evento fosse distribuído no decorrer de mais tempo (tipo, uma semana), ficasse mais fácil absorver tudo, mas compreendo que é muito difícil ter disponibilidade de tantos horários, tanto para os participantes quanto em termos de sala e e materiais. Painéis com outras pesquisas também seriam um bom recurso."}, {"role": "Aluno", "group": "GEPLET", "text": "Uma proposta interessante seria formar mesas para discutir campos teóricos e conceitos, possibilitando aos participantes discutirem autores e os caminhos que suas teorias possibilitam na pesquisa acadêmica."}, {"role": "Aluno", "group": "GEPLET", "text": "Seria interessante discutir a vida profissional após o doutorado em uma mesa só para isso. Que tal?"}, {"role": "Professor", "group": "FORTEC", "text": "Mais espaço para interação"}, {"role": "Professor", "group": "FORTEC", "text": "Maior ênfase categorial"}, {"role": "Aluno", "group": "UMANITÁ", "text": "Seria interessante conhecer ou trocar experiências com algum outro PPGE que tenha uma linha próxima da nossa."}, {"role": "Aluno", "group": "UMANITÁ", "text": "O painel 3 foi fraco na mediação."}, {"role": "Aluno", "group": "UMANITÁ", "text": "No final ficou em evidência de uma parcela dos discentes que não há uma justa valoração dos fóruns de linha, foi dito que era apenas dos grupos Fortec e Umanitá, quando os fóruns mensais são um momento de encontro e partilha da linha IV."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "Parabenizar toda a Equipe da Organização, Coordenação e Pesquisadores/as participantes pela excelência do Evento em seu contexto geral. Já estou na expectativa do próximo encontro."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "Senti falta de uma apresentação artístico-cultural."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "Emanaram muitas reflexões."}, {"role": "Pesquisador Externo", "group": "UMANITÁ", "text": "Saí com muita vontade de pesquisar e dar seguimento aos estudos acerca de várias/os autores da Linha IV."}], "aggregate_dist": {"1": 1, "2": 5, "3": 8, "4": 103, "5": 275}}
+</script>
+<script>
+const DATA = JSON.parse(document.getElementById('seminar-data').textContent);
+
+// ---------- helpers ----------
+const fmt1 = n => n.toLocaleString('pt-BR', {minimumFractionDigits:1, maximumFractionDigits:2});
+const pct = (n,total) => Math.round((n/total)*1000)/10;
+
+const PALETTE = ['#123A6E','#2E63AC','#6F93C4','#9C7C3E','#B79A5C','#5B6270','#9C3A2C'];
+
+// ---------- tabs ----------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ---------- meta / stamp ----------
+(function(){
+  const m = DATA.meta;
+  const geral = DATA.dims.find(d=>d.label==='Avaliação geral do evento');
+  document.getElementById('stamp-num').textContent = fmt1(geral.mean).replace('.', ',');
+  document.getElementById('stamp-n').textContent = 'n = ' + m.n_valid;
+
+  const meta = document.getElementById('meta-table');
+  const rows = [
+    ['Registros válidos', m.n_valid + ' de ' + m.total_submissions + ' envios (1 registro de teste excluído)'],
+    ['Período de respostas', m.collection_start + ' a ' + m.collection_end + ' de 2025'],
+    ['Evento avaliado', '09–10 de setembro de 2025 · UNEB, Campus I'],
+    ['Registrado por', 'Carlos Vidal'],
+  ];
+  rows.forEach(([k,v])=>{
+    const dt = document.createElement('dt'); dt.textContent = k;
+    const dd = document.createElement('dd'); dd.textContent = v;
+    meta.appendChild(dt); meta.appendChild(dd);
+  });
+})();
+
+// ---------- KPI cards ----------
+(function(){
+  const m = DATA.meta;
+  const geral = DATA.dims.find(d=>d.label==='Avaliação geral do evento');
+  const agg = DATA.aggregate_dist;
+  const aggTotal = Object.values(agg).reduce((a,b)=>a+b,0);
+  const pct45 = pct(agg['4']+agg['5'], aggTotal);
+  const topGroup = Object.entries(DATA.groups).sort((a,b)=>b[1]-a[1])[0];
+
+  const cards = [
+    [m.n_valid, '', 'Respondentes válidos'],
+    [fmt1(geral.mean).replace('.', ','), '/5', 'Avaliação geral média'],
+    [pct45.toLocaleString('pt-BR'), '%', 'das 392 notas foram 4 ou 5'],
+    [topGroup[0], ' · '+topGroup[1], 'Grupo mais representado'],
+  ];
+  const grid = document.getElementById('kpi-grid');
+  cards.forEach(([num,unit,label])=>{
+    const card = document.createElement('div'); card.className='kpi-card';
+    card.innerHTML = `<div class="kpi-num">${num}<span class="unit">${unit}</span></div><div class="kpi-label">${label}</div>`;
+    grid.appendChild(card);
+  });
+})();
+
+// ---------- attention callout ----------
+(function(){
+  const m = DATA.meta;
+  const box = document.getElementById('callout-attention');
+  box.innerHTML = `<div class="callout-label">Ponto de atenção recorrente</div>
+    <p><strong>${m.time_mentions} de ${m.n_valid} respondentes (${m.time_mentions_pct}%)</strong> mencionaram, de forma espontânea, a gestão do tempo — atrasos, exposições longas ou falta de tempo para debate — como sugestão para as próximas edições.</p>`;
+})();
+
+// ---------- chips (role / group) ----------
+function renderChips(elId, obj){
+  const el = document.getElementById(elId);
+  const total = Object.values(obj).reduce((a,b)=>a+b,0);
+  const entries = Object.entries(obj).sort((a,b)=>b[1]-a[1]);
+  entries.forEach(([name,count])=>{
+    const p = pct(count,total);
+    const row = document.createElement('div'); row.className='chip-row';
+    row.innerHTML = `<span class="chip-name">${name}</span>
+      <span class="chip-bar-wrap"><span class="chip-bar-fill" style="width:${p}%"></span></span>
+      <span class="chip-val">${count} · ${p}%</span>`;
+    el.appendChild(row);
+  });
+}
+renderChips('chips-role', DATA.roles);
+renderChips('chips-group', DATA.groups);
+
+// ---------- highlight quotes (resumo) ----------
+(function(){
+  const picks = DATA.positives
+    .slice()
+    .sort((a,b)=>b.text.length - a.text.length)
+    .filter(p=>p.text.length>60)
+    .slice(0,4);
+  const grid = document.getElementById('quote-highlight');
+  picks.forEach(p=>{
+    const card = document.createElement('div'); card.className='quote-card';
+    card.innerHTML = `<span class="quote-tag">${p.role} · ${p.group}</span><p class="quote-text">“${p.text}”</p>`;
+    grid.appendChild(card);
+  });
+})();
+
+// ---------- aggregate stacked bar ----------
+(function(){
+  const agg = DATA.aggregate_dist;
+  const total = Object.values(agg).reduce((a,b)=>a+b,0);
+  const colors = {'1':'#9C3A2C','2':'#C4785F','3':'#B79A5C','4':'#6F93C4','5':'#123A6E'};
+  const bar = document.getElementById('agg-stack');
+  ['1','2','3','4','5'].forEach(k=>{
+    const p = pct(agg[k], total);
+    const seg = document.createElement('div'); seg.className='stack-seg';
+    seg.style.width = p+'%'; seg.style.background = colors[k];
+    seg.textContent = p>=4 ? p+'%' : '';
+    bar.appendChild(seg);
+  });
+  const legend = document.getElementById('agg-legend');
+  ['1','2','3','4','5'].forEach(k=>{
+    const span = document.createElement('span');
+    span.innerHTML = `<span class="swatch" style="background:${colors[k]}"></span>Nota ${k} — ${agg[k]}`;
+    legend.appendChild(span);
+  });
+})();
+
+// ---------- ranked dimensions ----------
+(function(){
+  const attentionLabels = ['Espaço para interação, perguntas e trocas', 'Síntese clara no encerramento'];
+  const sorted = DATA.dims.slice().sort((a,b)=>b.mean-a.mean);
+  const chart = document.getElementById('rank-chart');
+  sorted.forEach(d=>{
+    const isAttn = attentionLabels.includes(d.label);
+    const row = document.createElement('div'); row.className='rank-row';
+    row.innerHTML = `
+      <div class="rank-head">
+        <div class="rank-label">${d.label}${isAttn?'<span class="rank-flag">Atenção</span>':''}</div>
+        <div class="rank-val">${fmt1(d.mean).replace('.', ',')}</div>
+      </div>
+      <div class="rank-track"><div class="rank-fill${isAttn?' attn':''}" style="width:${(d.mean/5*100).toFixed(1)}%"></div></div>`;
+    chart.appendChild(row);
+  });
+})();
+
+// ---------- donuts ----------
+function renderDonut(containerEl, obj, centerLabel){
+  const total = Object.values(obj).reduce((a,b)=>a+b,0);
+  const entries = Object.entries(obj).sort((a,b)=>b[1]-a[1]);
+  let acc = 0;
+  const stops = [];
+  entries.forEach((e,i)=>{
+    const start = acc/total*360;
+    acc += e[1];
+    const end = acc/total*360;
+    stops.push(`${PALETTE[i%PALETTE.length]} ${start}deg ${end}deg`);
+  });
+  const block = document.createElement('div'); block.className='donut-block';
+  const donut = document.createElement('div'); donut.className='donut';
+  donut.style.background = `conic-gradient(${stops.join(',')})`;
+  const center = document.createElement('div'); center.className='donut-center';
+  center.innerHTML = `<b>${total}</b><span>respostas</span>`;
+  const wrapDonut = document.createElement('div'); wrapDonut.style.position='relative';
+  wrapDonut.appendChild(donut); wrapDonut.appendChild(center);
+
+  const legend = document.createElement('div'); legend.className='donut-legend';
+  entries.forEach((e,i)=>{
+    const row = document.createElement('div'); row.className='donut-legend-row';
+    row.innerHTML = `<span class="swatch" style="background:${PALETTE[i%PALETTE.length]}"></span>
+      <span class="donut-legend-name">${e[0]}</span>
+      <span class="donut-legend-val">${e[1]} · ${pct(e[1],total)}%</span>`;
+    legend.appendChild(row);
+  });
+  block.appendChild(wrapDonut); block.appendChild(legend);
+  containerEl.appendChild(block);
+}
+(function(){
+  const grid = document.getElementById('donut-grid');
+  const b1 = document.createElement('div');
+  b1.innerHTML = '<div class="chip-col-title">Papel no PPGEduC</div>';
+  renderDonut(b1, DATA.roles);
+  const b2 = document.createElement('div');
+  b2.innerHTML = '<div class="chip-col-title">Grupo de pesquisa</div>';
+  renderDonut(b2, DATA.groups);
+  grid.appendChild(b1); grid.appendChild(b2);
+})();
+
+// ---------- moments horizontal bars ----------
+(function(){
+  const total = DATA.meta.n_valid;
+  const el = document.getElementById('moments-chart');
+  const sorted = DATA.moments.slice().sort((a,b)=>b.count-a.count);
+  sorted.forEach(m=>{
+    const p = pct(m.count,total);
+    const row = document.createElement('div'); row.className='hbar-row';
+    row.innerHTML = `<div class="hbar-label">${m.label}</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width:${p}%"></div></div>
+      <div class="hbar-val">${m.count}/${total} · ${p}%</div>`;
+    el.appendChild(row);
+  });
+})();
+
+// ---------- timeline column chart ----------
+(function(){
+  const el = document.getElementById('timeline-chart');
+  const max = Math.max(...DATA.timeline.map(t=>t.count));
+  DATA.timeline.forEach(t=>{
+    const h = Math.max(6,(t.count/max*100));
+    const col = document.createElement('div'); col.className='col';
+    col.innerHTML = `<div class="col-val">${t.count}</div>
+      <div class="col-bar" style="height:${h}%"></div>
+      <div class="col-label">${t.label}</div>`;
+    el.appendChild(col);
+  });
+})();
+
+// ---------- full comment lists ----------
+function renderComments(elId, arr){
+  const el = document.getElementById(elId);
+  arr.forEach(c=>{
+    const row = document.createElement('div'); row.className='comment-row';
+    row.innerHTML = `<div class="comment-meta">${c.role} · ${c.group}</div><p class="comment-text">${c.text}</p>`;
+    el.appendChild(row);
+  });
+}
+renderComments('list-positives', DATA.positives);
+document.getElementById('count-positives').textContent = DATA.positives.length;
+
+const suggestionsAndExtra = DATA.suggestions.concat(DATA.extra);
+renderComments('list-suggestions', suggestionsAndExtra);
+document.getElementById('count-suggestions').textContent = suggestionsAndExtra.length;
+</script>
+
+</body>
+</html>
